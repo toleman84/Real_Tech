@@ -17,3 +17,4 @@ def apartamentos():
 
 if __name__ == "__main__":
     Real_Tech.run(host='0.0.0.0', port=5000, debug=True)
+
