@@ -1,11 +1,11 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 import requests
 import json
 
 """for requests library: http://tiny.cc/x7niyz"""
 
-def get_prop():
+def get_data_prop():
     print("re-Generating a new List [Real Tech]:")
     url = "https://api.mercadolibre.com/sites/MLU/search"
     params = {
@@ -27,19 +27,22 @@ def get_prop():
         print("Error: {}".format(response.status_code))
         return []
 
-def making_json():
-    propertys = get_prop()
+def making_data_json():
+    propertys = get_data_prop()
     filtered_props = []
+
     if propertys:
-        
         for prop in propertys:
-            if prop['price'] > 50000 and prop['price'] < 100000:
+            if prop['price'] > 50000 and prop['price'] < 10000000:
                 filtered_props.append({
                     "id": prop['id'],
                     "title": prop['title'],
                     "price": prop['price'],
                     "currency": prop['currency_id'],
-                    "address": prop.get('address', {})
+                    "address": prop.get('address', {}),
+                    # agregar usuario para luego filtrar números telefónicos del mismo
+                    "user_id": prop.get('seller', {}).get('id', 'N/A'),
+                    "link": prop.get('permalink', 'N/A')
                 })
                 # print("id: {}".format(prop['id']))
                 # print("título: {}".format(prop['title']))
@@ -47,13 +50,14 @@ def making_json():
                 # print("link: {}".format(prop['permalink']))
                 # print("--")
         # Guardar los resultados filtrados en un archivo JSON
-        with open('filtered_properties.json', 'w', encoding='utf-8') as f:
+        with open('url_user.json', 'w', encoding='utf-8') as f:
             json.dump(filtered_props, f, ensure_ascii=False, indent=4)
         print("json of list granted. a Real Tech software")
     else:
         print("No propertys ...")
     print("end script ...")
+    return filtered_props
 
 
 if __name__ == "__main__":
-    making_json()
+    making_data_json()

@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apartamentos</title>
+    <title>Propiedades</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/styles.css?cache_id={{ cache_id }}">
+
 </head>
 <body>
     <h1>Filtered Properties</h1>
     <ul>
         {% for property in prop %}
         <li>
-            <h2>{{ property.title }}</h2>
+            <h3>{{ property.title }}</h3>
             <p>Price: {{ property.currency }} {{ property.price }}</p>
-            <p>Address: {{ property.address.street_name if property.address else 'No address available' }}</p>
+            <p>Address: {{ property.address.city_name }}</p>
         </li>
         {% endfor %}
     </ul>
