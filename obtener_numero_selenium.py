@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -7,6 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import re
 import time
 import json
+
 
 # Configurar opciones de Chrome (SE QUITA el modo headless para ver el navegador)
 chrome_options = Options()
@@ -25,13 +28,16 @@ driver = webdriver.Chrome(service=service, options=chrome_options)
 
 """leer el archivo json: url_user.json"""
 
-with open('url.json', 'r', encoding='utf-8') as f:
-    data = json.load(f)
-    for item in data:
-        url = item.get("link")
+def obtener():
+    """probar recursividad..."""
+    with open('url.json', 'r', encoding='utf-8') as f:
+        data = json.load(f)
+        for item in data:
+            url = item.get("link")
+            obtener_numero_selenium(url)
 
 
-def obtener_numero_selenium():
+def obtener_numero_selenium(url):
     try:
         # Abrir la página en el navegador
         driver.get(url)
@@ -73,3 +79,7 @@ def obtener_numero_selenium():
         # input("Presiona Enter para cerrar el navegador...")  # Espera antes de cerrar
         if match:
             driver.quit()  # Cerrar el navegador
+
+
+if __name__ == "__main__":
+    obtener()
