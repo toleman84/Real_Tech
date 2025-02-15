@@ -22,6 +22,9 @@ driver = webdriver.Chrome(service=service, options=chrome_options)
 # URL de la publicación
 # url = "https://apartamento.mercadolibre.com.uy/MLU-698247590-apartamentos-en-pozo-a-4-cuadras-de-la-rambla-_JM"
 
+
+"""leer el archivo json: url_user.json"""
+
 with open('url.json', 'r', encoding='utf-8') as f:
     data = json.load(f)
     for item in data:
