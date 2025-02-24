@@ -1,0 +1,137 @@
+[
+    {
+        "id": "MLU637888045",
+        "title": "Venta Apartamentos. Monoambientes, 1, 2 Y 3 Dormitorios. Edificio Nice Concepción.",
+        "price": 102600,
+        "currency": "USD",
+        "address": {
+            "state_id": "TUxVUE1PTlo2MDIy",
+            "state_name": "Montevideo",
+            "city_id": "TUxVQ01BTDE0YmY1",
+            "city_name": "Malvin"
+        },
+        "user_id": 1150715412,
+        "numero": 0,
+        "link": "https://apartamento.mercadolibre.com.uy/MLU-637888045-venta-apartamentos-monoambientes-1-2-y-3-dormitorios-edificio-nice-concepcion-_JM"
+    },
+    {
+        "id": "MLU688624630",
+        "title": "Venta Apartamentos Monambientes, 1 Y 2 Dormitorios. Proyecto Lawa Calyptus ",
+        "price": 104217,
+        "currency": "USD",
+        "address": {
+            "state_id": "TUxVUENBTnMxNzliYw",
+            "state_name": "Canelones",
+            "city_id": "TUxVQ0JBUjI1MTA",
+            "city_name": "Barra de Carrasco"
+        },
+        "user_id": 1846567901,
+        "numero": 0,
+        "link": "https://apartamento.mercadolibre.com.uy/MLU-688624630-venta-apartamentos-monambientes-1-y-2-dormitorios-proyecto-lawa-calyptus-_JM"
+    },
+    {
+        "id": "MLU669535280",
+        "title": "La Serena Barrio Jardín En Punta Ballena",
+        "price": 65000,
+        "currency": "USD",
+        "address": {
+            "state_id": "TUxVUE1BTFo5OWMx",
+            "state_name": "Maldonado",
+            "city_id": "TUxVQ1BaWmRhZmI3",
+            "city_name": "P. Ballena"
+        },
+        "user_id": 388577395,
+        "numero": 0,
+        "link": "https://terreno.mercadolibre.com.uy/MLU-669535280-la-serena-barrio-jardin-en-punta-ballena-_JM"
+    },
+    {
+        "id": "MLU690599348",
+        "title": "Lotes En Design Village Barrio Privado En Solanas . Financiacion Del 100% A Sola Firma ",
+        "price": 155000,
+        "currency": "USD",
+        "address": {
+            "state_id": "TUxVUE1BTFo5OWMx",
+            "state_name": "Maldonado",
+            "city_id": "TUxVQ1BaWmRhZmI3",
+            "city_name": "P. Ballena"
+        },
+        "user_id": 44983876,
+        "numero": 0,
+        "link": "https://terreno.mercadolibre.com.uy/MLU-690599348-lotes-en-design-village-barrio-privado-en-solanas-financiacion-del-100-a-sola-firma-_JM"
+    },
+    {
+        "id": "MLU647173663",
+        "title": "Costa Desing",
+        "price": 269000,
+        "currency": "USD",
+        "address": {
+            "state_id": "TUxVUENBTnMxNzliYw",
+            "state_name": "Canelones",
+            "city_id": "TUxVQ0xPTWQ1NGJi",
+            "city_name": "Lomas de Solymar"
+        },
+        "user_id": 2111156021,
+        "numero": 0,
+        "link": "https://casa.mercadolibre.com.uy/MLU-647173663-costa-desing-_JM"
+    },
+    {
+        "id": "MLU696571682",
+        "title": "Buceo Pindo Apartamentos Monoambientes, 1 Y 2 Dormitorios",
+        "price": 89561,
+        "currency": "USD",
+        "address": {
+            "state_id": "TUxVUE1PTlo2MDIy",
+            "state_name": "Montevideo",
+            "city_id": "TUxVQ0JVQzNlMDdl",
+            "city_name": "Buceo"
+        },
+        "user_id": 234870830,
+        "numero": 0,
+        "link": "https://apartamento.mercadolibre.com.uy/MLU-696571682-buceo-pindo-apartamentos-monoambientes-1-y-2-dormitorios-_JM"
+    },
+    {
+        "id": "MLU703185732",
+        "title": "Be Live Buceo",
+        "price": 135000,
+        "currency": "USD",
+        "address": {
+            "state_id": "TUxVUE1PTlo2MDIy",
+            "state_name": "Montevideo",
+            "city_id": "TUxVQ1BVRTI0NDA",
+            "city_name": "Puerto Buceo"
+        },
+        "user_id": 434485091,
+        "numero": 0,
+        "link": "https://apartamento.mercadolibre.com.uy/MLU-703185732-be-live-buceo-_JM"
+    },
+    {
+        "id": "MLU706167448",
+        "title": "Postal Carmelo - Carmelo",
+        "price": 100013,
+        "currency": "USD",
+        "address": {
+            "state_id": "TUxVUENPTGExMTUwOQ",
+            "state_name": "Colonia",
+            "city_id": "TUxVQ0NBUjM5ZGZj",
+            "city_name": "Carmelo"
+        },
+        "user_id": 339137724,
+        "numero": 0,
+        "link": "https://apartamento.mercadolibre.com.uy/MLU-706167448-postal-carmelo-carmelo-_JM"
+    },
+    {
+        "id": "MLU706170484",
+        "title": "Yes! Plaza Varela",
+        "price": 110200,
+        "currency": "USD",
+        "address": {
+            "state_id": "TUxVUE1PTlo2MDIy",
+            "state_name": "Montevideo",
+            "city_id": "TUxVQ1BPQzM5ZGRi",
+            "city_name": "Pocitos"
+        },
+        "user_id": 222052338,
+        "numero": 0,
+        "link": "https://apartamento.mercadolibre.com.uy/MLU-706170484-yes-plaza-varela-_JM"
+    }
+]

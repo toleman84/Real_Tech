@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import os
+import shutil
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -26,28 +28,47 @@ driver = webdriver.Chrome(service=service, options=chrome_options)
 # url = "https://apartamento.mercadolibre.com.uy/MLU-698247590-apartamentos-en-pozo-a-4-cuadras-de-la-rambla-_JM"
 
 
-def guardar_numero(numbers):
+def guardar_numero(numbers, user_id):
     """
     Guarda el número en el archivo 'user_id_num.json' sin eliminar los existentes.
     Si el archivo no existe o su contenido no es una lista, se crea una nueva lista.
     """
-    archivo = "user_id_num.json"
+    # hacer copia
+    archivo_original = "url.json" # url_user.json
+    archivo_backup = "url_backup.json" # user_id_num.json
+
+    # Crear copia de seguridad antes de modificar el JSON
+    if os.path.exists(archivo_original):
+        shutil.copy(archivo_original, archivo_backup)
+        print(f"Copia de seguridad creada: {archivo_backup}")
+    else:
+        print(f"El archivo {archivo_original} no existe.")
+        return
+
+    # agregar número
     try:
-        with open(archivo, "r", encoding="utf-8") as f:
+        # Cargar JSON
+        with open(archivo_backup, "r", encoding="utf-8") as f:
             datos = json.load(f)
-            if not isinstance(datos, list):
-                datos = []
-    except (FileNotFoundError, json.JSONDecodeError):
-        datos = []
 
-    # agregar el número obtenido
-    datos.append(numbers)
+        # Verificar si la clave "numero" existe y actualizarla
+        actualizado = False
+        for item in datos:
+            if item.get("user_id") == user_id:
+                print(f"Actualizando número para user_id {user_id}: {numbers}")
+                item["numero"] = numbers
+                actualizado = True
+                break # Una vez encontrado y actualizado, salimos del loop
 
-    # guardar de vuelta en el archivo
-    with open(archivo, "w", encoding="utf-8") as f:
-        json.dump(datos, f, indent=4)
+        if actualizado:
+            # Guardar los cambios en el archivo original
+            with open(archivo_backup, 'w', encoding='utf-8') as f:
+                json.dump(datos, f, indent=4, ensure_ascii=False)
+        else:
+            print("No se encontró el user_id {user_id} en el JSON.")
 
-    print(f"Número {numbers} guardado en {archivo}")
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"Error al procesar el archivo JSON: {e}")
 
 
 def obtener():
@@ -57,14 +78,15 @@ def obtener():
 
     for item in data:
         url = item.get("link")
-        # print(url)
-        if url:
-            obtener_numero_selenium(url)
+        user_id = item.get("user_id")
+
+        if url and user_id:
+            obtener_numero_selenium(url, user_id)
         else:
-            print("No se encontró el campo 'link' en el item", item)
+            print("Faltan datos en el item: {item}")
 
 
-def obtener_numero_selenium(url):
+def obtener_numero_selenium(url, user_id):
     """
     Abre la URL con Selenium, simula un clic en el elemento que contiene "#whatsapp"
     y extrae el número de teléfono para guardarlo en 'user_id_num.json'.
@@ -73,7 +95,7 @@ def obtener_numero_selenium(url):
     try:
         # Abrir la página en el navegador
         driver.get(url)
-        time.sleep(2)  # Esperar a que cargue la página completamente
+        time.sleep(5)  # Esperar a que cargue la página completamente
 
         # Buscar la etiqueta <use href="#whatsapp">
         whatsapp_icon = None
@@ -101,7 +123,7 @@ def obtener_numero_selenium(url):
             if match:
                 numbers = match.group(1)
                 print("Número de WhatsApp:", numbers)
-                guardar_numero(numbers)
+                guardar_numero(numbers, user_id)
             else:
                 print("No se pudo extraer el número.")
         else:
