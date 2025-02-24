@@ -26,33 +26,64 @@ driver = webdriver.Chrome(service=service, options=chrome_options)
 # url = "https://apartamento.mercadolibre.com.uy/MLU-698247590-apartamentos-en-pozo-a-4-cuadras-de-la-rambla-_JM"
 
 
-"""leer el archivo json: url_user.json"""
+def guardar_numero(numbers):
+    """
+    Guarda el número en el archivo 'user_id_num.json' sin eliminar los existentes.
+    Si el archivo no existe o su contenido no es una lista, se crea una nueva lista.
+    """
+    archivo = "user_id_num.json"
+    try:
+        with open(archivo, "r", encoding="utf-8") as f:
+            datos = json.load(f)
+            if not isinstance(datos, list):
+                datos = []
+    except (FileNotFoundError, json.JSONDecodeError):
+        datos = []
+
+    # agregar el número obtenido
+    datos.append(numbers)
+
+    # guardar de vuelta en el archivo
+    with open(archivo, "w", encoding="utf-8") as f:
+        json.dump(datos, f, indent=4)
+
+    print(f"Número {numbers} guardado en {archivo}")
+
 
 def obtener():
-    """probar recursividad..."""
+    """Leer el archivo 'url.json' y procesar cada URL."""
     with open('url.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
-        for item in data:
-            url = item.get("link")
+
+    for item in data:
+        url = item.get("link")
+        # print(url)
+        if url:
             obtener_numero_selenium(url)
+        else:
+            print("No se encontró el campo 'link' en el item", item)
 
 
 def obtener_numero_selenium(url):
+    """
+    Abre la URL con Selenium, simula un clic en el elemento que contiene "#whatsapp"
+    y extrae el número de teléfono para guardarlo en 'user_id_num.json'.
+    """
+    # match = None
     try:
         # Abrir la página en el navegador
         driver.get(url)
-        time.sleep(5)  # Esperar a que cargue la página completamente
+        time.sleep(2)  # Esperar a que cargue la página completamente
 
         # Buscar la etiqueta <use href="#whatsapp">
         whatsapp_icon = None
         icons = driver.find_elements(By.TAG_NAME, "use")
-        
         for icon in icons:
             href = icon.get_attribute("href")
             if href and "#whatsapp" in href:
                 whatsapp_icon = icon
                 break  # Tomamos el primer <use> encontrado
-        
+
         if whatsapp_icon:
             # Simular clic en <use> usando ActionChains
             action = ActionChains(driver)
@@ -63,22 +94,20 @@ def obtener_numero_selenium(url):
 
             # Capturar la URL después de hacer clic
             whatsapp_link = driver.current_url
-            print("Enlace de WhatsApp encontrado:", whatsapp_link)
+            # print("Enlace de WhatsApp encontrado:", whatsapp_link)
 
             # Extraer el número de WhatsApp con regex
             match = re.search(r"phone=(\d+)", whatsapp_link)
             if match:
-                print("Número de WhatsApp:", match.group(1))
+                numbers = match.group(1)
+                print("Número de WhatsApp:", numbers)
+                guardar_numero(numbers)
             else:
                 print("No se pudo extraer el número.")
-
         else:
             print("No se encontró el botón de WhatsApp en la página.")
-
-    finally:
-        # input("Presiona Enter para cerrar el navegador...")  # Espera antes de cerrar
-        if match:
-            driver.quit()  # Cerrar el navegador
+    except Exception as e:
+        print(f"Error: {e}")
 
 
 if __name__ == "__main__":
