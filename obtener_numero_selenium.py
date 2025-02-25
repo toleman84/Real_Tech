@@ -31,19 +31,8 @@ driver = webdriver.Chrome(service=service, options=chrome_options)
 def guardar_numero(numbers, user_id):
     """
     Guarda el número en el archivo 'user_id_num.json' sin eliminar los existentes.
-    Si el archivo no existe o su contenido no es una lista, se crea una nueva lista.
     """
-    # hacer copia
-    archivo_original = "url.json" # url_user.json
     archivo_backup = "url_backup.json" # user_id_num.json
-
-    # Crear copia de seguridad antes de modificar el JSON
-    if os.path.exists(archivo_original):
-        shutil.copy(archivo_original, archivo_backup)
-        print(f"Copia de seguridad creada: {archivo_backup}")
-    else:
-        print(f"El archivo {archivo_original} no existe.")
-        return
 
     # agregar número
     try:
@@ -56,7 +45,7 @@ def guardar_numero(numbers, user_id):
         for item in datos:
             if item.get("user_id") == user_id:
                 print(f"Actualizando número para user_id {user_id}: {numbers}")
-                item["numero"] = numbers
+                item["numero"] = int(numbers)
                 actualizado = True
                 break # Una vez encontrado y actualizado, salimos del loop
 
@@ -64,16 +53,27 @@ def guardar_numero(numbers, user_id):
             # Guardar los cambios en el archivo original
             with open(archivo_backup, 'w', encoding='utf-8') as f:
                 json.dump(datos, f, indent=4, ensure_ascii=False)
+                print(f"Archivo actualizado correctamente: {archivo_backup}")
+
         else:
-            print("No se encontró el user_id {user_id} en el JSON.")
+            print(f"⚠ No se encontró el user_id {user_id} en el JSON.")
 
     except (FileNotFoundError, json.JSONDecodeError) as e:
-        print(f"Error al procesar el archivo JSON: {e}")
+        print(f"❌ Error al procesar el archivo JSON: {e}")
 
 
 def obtener():
-    """Leer el archivo 'url.json' y procesar cada URL."""
-    with open('url.json', 'r', encoding='utf-8') as f:
+    """Leer el archivo 'url.json', hacer backup y procesar cada URL."""
+    archivo_original = "url.json"
+    archivo_backup = "url_backup.json"
+
+    # Crear copia de seguridad SOLO UNA VEZ antes de empezar
+    if os.path.exists(archivo_original):
+        shutil.copy(archivo_original, archivo_backup)
+        print(f"📂 Copia de seguridad creada: {archivo_backup}")
+
+    # Leer el JSON de la copia de seguridad
+    with open(archivo_backup, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
     for item in data:
@@ -83,7 +83,7 @@ def obtener():
         if url and user_id:
             obtener_numero_selenium(url, user_id)
         else:
-            print("Faltan datos en el item: {item}")
+            print(f"Faltan datos en el item: {item}")
 
 
 def obtener_numero_selenium(url, user_id):
@@ -122,7 +122,7 @@ def obtener_numero_selenium(url, user_id):
             match = re.search(r"phone=(\d+)", whatsapp_link)
             if match:
                 numbers = match.group(1)
-                print("Número de WhatsApp:", numbers)
+                print(f"✅ WhatsApp encontrado para {user_id}: {numbers}")
                 guardar_numero(numbers, user_id)
             else:
                 print("No se pudo extraer el número.")
