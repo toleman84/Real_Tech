@@ -25,6 +25,7 @@
     </form>
 
     <h2>Resultados</h2>
+    {% if prop %}
     <ul>
         {% for property in prop %}
             <li>
@@ -35,5 +36,9 @@
             </li>
         {% endfor %}
     </ul>
+    {% else %}
+        <p>No se encontraron propiedades.</p>
+    {% endif %}
+    
 </body>
 </html>
