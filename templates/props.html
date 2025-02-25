@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/styles.css') }}?cache_id={{ cache_id }}">
+    <title>Lista de Propiedades</title>
+</head>
+<body>
+    <h1>Buscar Propiedades</h1>
+
+    <form method="POST">
+        <label for="category">Categoría:</label>
+        <select id="category" name="category">
+            <option value="MLU1459" {% if category == "MLU1459" %}selected{% endif %}>Inmuebles</option>
+        </select>
+
+        <label for="prop_id">Tipo de Propiedad:</label>
+        <select id="prop_id" name="prop_id">
+            {% for p in PROPIEDADES %}
+                <option value="{{ p.id }}" {% if p.id == prop_id %}selected{% endif %}>{{ p.name }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Buscar</button>
+    </form>
+
+    <h2>Resultados</h2>
+    <ul>
+        {% for property in prop %}
+            <li>
+                <h3>{{ property.title }}</h3>
+                <p>Price: {{ property.currency }} {{ property.price }} <br>
+                Address: {{ property.address.city_name }} <br>
+                Whatsapp: </p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

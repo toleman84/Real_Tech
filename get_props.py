@@ -5,18 +5,19 @@ import json
 
 """for requests library: http://tiny.cc/x7niyz"""
 
-def get_data_prop():
+def get_data_prop(category="MLU1459", prop_id="MLA1472", prop_name="Departamenots"):
     print("re-Generating a new List [Real Tech]:")
     url = "https://api.mercadolibre.com/sites/MLU/search"
     params = {
-        "category": "MLU1459",
+        "category": category,
         "limit": 10,
         "offset": 0,
         "children_categories": [
-        {
-            "id": "MLA1472",
-            "name": "Departamentos"
-        }],
+            {
+                "id": prop_id,
+                "name": prop_name
+            }
+        ],
     }
     response = requests.get(url, params=params)
     if response.status_code == 200:
@@ -26,6 +27,7 @@ def get_data_prop():
         """On error, prints the error code and returns an empty list."""
         print("Error: {}".format(response.status_code))
         return []
+
 
 def making_data_json():
     propertys = get_data_prop()

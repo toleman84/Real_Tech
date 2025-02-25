@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
+import json
 
 from get_props import making_data_json
 
 Real_Tech = Flask(__name__)
+
+def cargar_propiedades():
+    with open("url_backup.json", "r", encoding="utf-8") as file:
+        return json.load(file)
 
 @Real_Tech.route("/")
 def hello_world():
@@ -15,7 +20,7 @@ def hello_world():
 
 @Real_Tech.route("/propiedades")
 def propiedades():
-    prop = making_data_json()
+    prop = cargar_propiedades()
     return render_template("propiedades.html", prop=prop)
 
 
