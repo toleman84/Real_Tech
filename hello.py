@@ -8,7 +8,7 @@ from get_props import making_data_json
 Real_Tech = Flask(__name__)
 
 def cargar_propiedades():
-    with open("url_backup.json", "r", encoding="utf-8") as file:
+    with open("url_id_num.json", "r", encoding="utf-8") as file:
         return json.load(file)
 
 @Real_Tech.route("/")

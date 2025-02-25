@@ -5,7 +5,7 @@ import json
 
 """for requests library: http://tiny.cc/x7niyz"""
 
-def get_data_prop(category="MLU1459", prop_id="MLA1472", prop_name="Departamenots"):
+def get_data_prop(category="MLU1459", prop_id="MLA1472", prop_name="Departamentos"):
     print("re-Generating a new List [Real Tech]:")
     url = "https://api.mercadolibre.com/sites/MLU/search"
     params = {
