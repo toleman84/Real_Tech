@@ -32,7 +32,7 @@ def guardar_numero(numbers, user_id):
     """
     Guarda el número en el archivo 'user_id_num.json' sin eliminar los existentes.
     """
-    archivo_backup = "url_backup.json" # user_id_num.json
+    archivo_backup = "url_id_num.json" # user_id_num.json
 
     # agregar número
     try:
@@ -63,9 +63,9 @@ def guardar_numero(numbers, user_id):
 
 
 def obtener():
-    """Leer el archivo 'url.json', hacer backup y procesar cada URL."""
-    archivo_original = "url.json"
-    archivo_backup = "url_backup.json"
+    """Leer el archivo 'url_user.json', hacer backup y procesar cada URL y escribir en url_id_num.json"""
+    archivo_original = "url_user.json"
+    archivo_backup = "url_id_num.json"
 
     # Crear copia de seguridad SOLO UNA VEZ antes de empezar
     if os.path.exists(archivo_original):

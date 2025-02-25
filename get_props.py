@@ -53,7 +53,7 @@ def making_data_json():
                 # print("link: {}".format(prop['permalink']))
                 # print("--")
         # Guardar los resultados filtrados en un archivo JSON
-        with open('url_user_2.json', 'w', encoding='utf-8') as f:
+        with open('url_user.json', 'w', encoding='utf-8') as f:
             json.dump(filtered_props, f, ensure_ascii=False, indent=4)
         print("json of list granted. a Real Tech software")
     else:
