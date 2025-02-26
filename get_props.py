@@ -12,6 +12,7 @@ def get_data_prop(category="MLU1459", prop_id="MLA1472", prop_name="Departamento
         "category": category,
         "limit": 10,
         "offset": 0,
+        "user_type": "normal",
         "children_categories": [
             {
                 "id": prop_id,
@@ -53,7 +54,7 @@ def making_data_json():
                 # print("link: {}".format(prop['permalink']))
                 # print("--")
         # Guardar los resultados filtrados en un archivo JSON
-        with open('url_user.json', 'w', encoding='utf-8') as f:
+        with open('url_user_3.json', 'w', encoding='utf-8') as f:
             json.dump(filtered_props, f, ensure_ascii=False, indent=4)
         print("json of list granted. a Real Tech software")
     else:
